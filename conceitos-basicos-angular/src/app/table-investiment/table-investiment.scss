@@ -1,0 +1,10 @@
+:host { display: block; }
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 12px;
+}
+table { width: 100%; }
+th, td.mat-footer-cell { font-weight: 600; }

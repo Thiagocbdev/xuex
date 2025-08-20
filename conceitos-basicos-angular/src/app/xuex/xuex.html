@@ -1,0 +1,31 @@
+<mat-toolbar color="warn" class="toolbar">
+  <div class="toolbar-left">
+    <span class="brand">Xuex Investimentos</span>
+  </div>
+
+  <div class="toolbar-center">
+    <button mat-button="filled" 
+            [class.active]="active() === 'novo'"
+            (click)="setNovo()">
+      Membro novo
+    </button>
+
+    <button mat-button="filled" 
+            [class.active]="active() === 'ativo'"
+            (click)="setAtivo()">
+      Membro ativo
+    </button>
+  </div>
+
+  <div class="toolbar-right"></div>
+</mat-toolbar>
+
+<main class="conteudo">
+  <section *ngIf="active() === 'ativo'">
+    <app-table-investiment></app-table-investiment>
+  </section>
+
+  <section *ngIf="active() === 'novo'" class="placeholder">
+    <app-calc-new-member></app-calc-new-member>
+  </section>
+</main>

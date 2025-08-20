@@ -1,0 +1,23 @@
+<div class="container">
+
+    <div class="form-box">
+        <form #frm="ngForm" (ngSubmit)="calcularResultado()">
+            <h2>caulculadora</h2>
+            <label for="numero1">Número 1</label>
+            <input type="number" name="numero1" id="numero1" [(ngModel)]="numero1" />
+
+            <label for="numero2">Número 2</label>
+            <input type="number" name="numero2" id="numero2" [(ngModel)]="numero2" />
+
+            <p *ngIf="resultado < 10">seu resultado foi abaixo de 10</p>
+
+            <button type="submit">Somar</button>
+
+        </form>
+
+        <div class="result-dysplay">
+                <p>Resultado: <span id="result"> {{ resultado }}</span></p>
+        </div>
+    </div>
+
+</div>

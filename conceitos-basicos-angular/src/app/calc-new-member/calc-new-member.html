@@ -1,0 +1,87 @@
+<form [formGroup]="form" class="form-grid" (ngSubmit)="calcular()">
+  <mat-form-field appearance="outline">
+    <mat-label>Valor inicial</mat-label>
+    <input matInput type="number" min="0" formControlName="initial" placeholder="Ex.: 1000" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Dias</mat-label>
+    <input matInput type="number" min="1" max="365" formControlName="days" required>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">
+    <mat-icon>calculate</mat-icon>
+    Calcular
+  </button>
+
+  <button mat-stroked-button type="button" (click)="limpar()">
+    <mat-icon>refresh</mat-icon>
+    Limpar
+  </button>
+
+  <button mat-stroked-button type="button" (click)="exportarPdf()" [disabled]="!dataSource.length">
+    <mat-icon>picture_as_pdf</mat-icon>
+    Exportar PDF
+  </button>
+</form>
+
+<!-- dica/legenda das regras -->
+<p *ngIf="dataSource.length" class="hint">
+  Regras: Dias 1–4 com <strong>4 aplicações</strong> de 0,6% ao dia; demais dias <strong>2 aplicações</strong>. 
+  Bônus inicial aplicado no dia 1 conforme a faixa informada.
+</p>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+  <!-- Dia -->
+  <ng-container matColumnDef="day">
+    <th mat-header-cell *matHeaderCellDef> Dia </th>
+    <td mat-cell *matCellDef="let r"> {{ r.day }} </td>
+    <td mat-footer-cell *matFooterCellDef> Totais </td>
+  </ng-container>
+
+  <!-- Aplicações no dia -->
+  <ng-container matColumnDef="times">
+    <th mat-header-cell *matHeaderCellDef> Aplicações </th>
+    <td mat-cell *matCellDef="let r"> {{ r.times }}x </td>
+    <td mat-footer-cell *matFooterCellDef> — </td>
+  </ng-container>
+
+  <!-- Bônus inicial -->
+  <ng-container matColumnDef="bonus">
+    <th mat-header-cell *matHeaderCellDef> Bônus </th>
+    <td mat-cell *matCellDef="let r"> {{ r.bonus | number:'1.2-2' }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ totalBonus | number:'1.2-2' }} </td>
+  </ng-container>
+
+  <!-- Valor -->
+  <ng-container matColumnDef="value">
+    <th mat-header-cell *matHeaderCellDef> Valor </th>
+    <td mat-cell *matCellDef="let r"> {{ r.value | number:'1.2-2' }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ totalInvestido | number:'1.2-2' }} </td>
+  </ng-container>
+
+  <!-- Ganhos do dia -->
+  <ng-container matColumnDef="profit">
+    <th mat-header-cell *matHeaderCellDef> Ganhos do dia </th>
+    <td mat-cell *matCellDef="let r"> {{ r.profit | number:'1.2-2' }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ totalLucro | number:'1.2-2' }} </td>
+  </ng-container>
+
+  <!-- Ganhos acumulados -->
+  <ng-container matColumnDef="cumProfit">
+    <th mat-header-cell *matHeaderCellDef> Ganhos acumulados </th>
+    <td mat-cell *matCellDef="let r"> {{ r.cumProfit | number:'1.2-2' }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ totalLucro | number:'1.2-2' }} </td>
+  </ng-container>
+
+  <!-- Valor Final -->
+  <ng-container matColumnDef="final">
+    <th mat-header-cell *matHeaderCellDef> Valor final </th>
+    <td mat-cell *matCellDef="let r"> {{ r.final | number:'1.2-2' }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ saldoFinal | number:'1.2-2' }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row        *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+</table>

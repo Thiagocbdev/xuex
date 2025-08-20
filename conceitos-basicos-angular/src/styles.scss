@@ -1,0 +1,28 @@
+/* src/styles.scss */
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+/* Tema mínimo: só define o primário (azul) e evita variáveis duvidosas */
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$blue-palette,
+  ),
+  density: (scale: 0)
+));
+
+:root {
+  @include mat.all-component-themes($theme);
+  color-scheme: light;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+
+  /* fundo padrão */
+  background-color: #f3f9ff; /* azul bem clarinho */
+  color: #222; /* cor do texto */
+}

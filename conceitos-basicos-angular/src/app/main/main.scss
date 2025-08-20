@@ -1,0 +1,20 @@
+.spacer { flex: 1 1 auto; }
+.conteudo { padding: 16px; }
+
+body, html {
+  margin: 0;
+  height: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.ativo {
+  font-weight: 600;
+  text-decoration: underline;
+  border-bottom: 2px solid currentColor; 
+}
+
+:host ::ng-deep mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}

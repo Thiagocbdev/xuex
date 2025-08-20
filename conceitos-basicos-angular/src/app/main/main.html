@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+  <span>Minha App</span>
+  <span class="spacer"></span>
+
+  <button mat-button
+          routerLink="/home"
+          routerLinkActive="ativo"
+          [routerLinkActiveOptions]="{ exact: true }">
+    Início
+  </button>
+
+  <button mat-button
+          routerLink="/calculadora"
+          routerLinkActive="ativo"
+          [routerLinkActiveOptions]="{ exact: true }">
+    Calculadora
+  </button>
+
+  <button mat-button
+          routerLink="/lista-compras"
+          routerLinkActive="ativo"
+          [routerLinkActiveOptions]="{ exact: true }">
+    lista-compras
+  </button>
+
+  <button mat-button
+          routerLink="/table-insvestment"
+          routerLinkActive="ativo"
+          [routerLinkActiveOptions]="{ exact: true }">
+    tabela xuex
+  </button>
+</mat-toolbar>
+
+<div class="conteudo">
+  <router-outlet></router-outlet>
+</div>
